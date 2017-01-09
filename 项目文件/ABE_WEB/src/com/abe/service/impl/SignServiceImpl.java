@@ -233,7 +233,7 @@ public class SignServiceImpl extends ParentServiceImpl implements iSignService{
 					InfoParents p=new InfoParents(ipId, null, null, null, ipPhone, null);
 					save(p);
 					//2、保存账号
-					Users user=new Users(NameOfDate.getNum(), uNum, uName, uPass, "1", new Timestamp(new Date().getTime()), null, null, ipId);
+					Users user=new Users(NameOfDate.getNum(), uNum, uName, uPass, "1", new Timestamp(new Date().getTime()), null, null, ipId,null);
 					save(user);
 					//在环信系统中注册
 					String token=usersSer.getToken(iUsersService.ACCESS_TOKEN);
@@ -331,8 +331,14 @@ public class SignServiceImpl extends ParentServiceImpl implements iSignService{
 	}
 	@Override
 	public RespCommon queryCode(String phone) {
-		saveCode("admin", phone, (int)((Math.random()*9+1)*100000)+"");//发送6位随机数验证码
-		return getCode("admin");
+		//发送6位随机数验证码
+		if (saveCode("admin", phone, (int)((Math.random()*9+1)*100000)+"")) {
+			return getCode("admin");
+		}else {
+			RespCommon common=new RespCommon();
+			common.setResult("002");
+			return common;
+		}
 	}
 	
 	

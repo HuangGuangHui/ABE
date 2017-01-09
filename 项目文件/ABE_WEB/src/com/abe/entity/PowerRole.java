@@ -15,8 +15,18 @@ public class PowerRole implements java.io.Serializable {
 	private String RDesc;
 	private String RParentIds;
 	private Timestamp RCreateTime;
+	private String UId;
 
 	// Constructors
+	private Users user;
+	
+	
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
 	/** default constructor */
 	public PowerRole() {
@@ -29,12 +39,13 @@ public class PowerRole implements java.io.Serializable {
 
 	/** full constructor */
 	public PowerRole(String RId, String RName, String RDesc, String RParentIds,
-			Timestamp RCreateTime) {
+			Timestamp RCreateTime, String UId) {
 		this.RId = RId;
 		this.RName = RName;
 		this.RDesc = RDesc;
 		this.RParentIds = RParentIds;
 		this.RCreateTime = RCreateTime;
+		this.UId = UId;
 	}
 
 	// Property accessors
@@ -77,6 +88,14 @@ public class PowerRole implements java.io.Serializable {
 
 	public void setRCreateTime(Timestamp RCreateTime) {
 		this.RCreateTime = RCreateTime;
+	}
+
+	public String getUId() {
+		return this.UId;
+	}
+
+	public void setUId(String UId) {
+		this.UId = UId;
 	}
 
 }
